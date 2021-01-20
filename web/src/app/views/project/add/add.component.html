@@ -1,0 +1,154 @@
+<div class="animated fadeIn">
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="card form-comp">
+        <div class="card-header">
+          <strong>Add</strong> Project
+        </div>
+        <div class="card-body form-body formMargin">
+     <!-- add News form -->
+     
+
+          <form  class="form-horizontal"  [formGroup]="projectForm" (ngSubmit)="AddProject()">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Project Name</label>
+              <div class="col-md-9">
+                <input type="text" formControlName="pname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pname.errors }">
+                <div *ngIf="submitted && f.pname.errors" class="invalid-feedback">
+                    <div *ngIf="f.pname.errors.required">Please enter project name.</div>
+                  </div>
+              </div>
+            </div>
+
+            
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Description</label>
+              <div class="col-md-9">
+                <textarea class="form-control" rows="5" formControlName="description"  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                    <div *ngIf="f.description.errors.required">Please enter project description.</div>
+                  </div>
+              </div>
+            </div>
+ <!--
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Select Forms</label>
+              <div class="col-md-9">
+                  <select class="form-control"  formControlName="forms" [ngClass]="{ 'is-invalid': submitted && f.forms.errors }">
+                      <option value="">---Select Forms---</option> 
+                    <option *ngFor="let f of form_list"[ngValue]="f.id">{{f.name}}</option>
+                    </select>
+                <div *ngIf="submitted && f.forms.errors" class="invalid-feedback">
+                    <div *ngIf="f.forms.errors.required">Please select forms.</div>
+                  </div>
+              </div>
+            </div>
+           
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Assign Users</label>
+              <div class="col-md-9">
+                  <select class="form-control" formControlName="user" [ngClass]="{ 'is-invalid': submitted && f.user.errors }">
+                    <option value="">---Select User---</option>
+                      <option *ngFor="let u of user_list"[ngValue]="u.id">{{u.firstName}} {{u.lastName}}</option>
+                    </select>
+                <div *ngIf="submitted && f.user.errors" class="invalid-feedback">
+                    <div *ngIf="f.user.errors.required">Please select user.</div>
+                  </div>
+              </div>
+            </div>
+
+<div class="form-group row">
+  <label class="col-md-3 col-form-label" for="select1">Select Forms</label>
+  <div class="col-md-9">
+    <angular2-multiselect class="form-control" [data]="dropdownFormList" formControlName="forms"  [ngClass]="{ 'is-invalid': submitted && f.forms.errors }"
+   
+   
+    [(ngModel)]="selectedItems" 
+    [settings]="settings" 
+                      (onSelect)="onItemSelect($event)"
+                      (onDeSelect)="OnItemDeSelect($event)" 
+                      (onSelectAll)="onSelectAll($event)" 
+                      (onDeSelectAll)="onDeSelectAll($event)"
+    ></angular2-multiselect>
+
+   <div *ngIf="submitted && f.forms.errors" class="invalid-feedback">
+    <div *ngIf="f.forms.errors.required">Please select Forms.</div>
+  </div>
+  </div>
+</div>    
+-->
+<div class="form-group row">
+  <label class="col-md-3 col-form-label" for="select1">Select Forms</label>
+  <div class="col-md-9">
+    <angular2-multiselect class="form-control" [data]="dropdownFormList" formControlName="forms"  [ngClass]="{ 'is-invalid': submitted && f.forms.errors }"
+   ></angular2-multiselect>
+
+   <div *ngIf="submitted && f.forms.errors" class="invalid-feedback">
+    <div *ngIf="f.forms.errors.required">Please select Forms.</div>
+  </div>
+  </div>
+</div>    
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Assign Users</label>
+              <div class="col-md-9">
+                <angular2-multiselect class="form-control" [data]="dropdownList" formControlName="user"  [ngClass]="{ 'is-invalid': submitted && f.user.errors }"
+               ></angular2-multiselect>
+
+               <div *ngIf="submitted && f.user.errors" class="invalid-feedback">
+                <div *ngIf="f.user.errors.required">Please select users.</div>
+              </div>
+              </div>
+            </div>   
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Symbol</label>
+              <div class="col-md-9">
+                <input type="text" formControlName="symbol" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.symbol.errors }">
+                <div *ngIf="submitted && f.symbol.errors" class="invalid-feedback">
+                    <div *ngIf="f.symbol.errors.required">Please enter symbol.</div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="select1">Submitted Forms</label>
+                <div class="col-md-9">
+                  <input type="number" formControlName="formssubmitted" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.formssubmitted.errors }">
+                  <div *ngIf="submitted && f.formssubmitted.errors" class="invalid-feedback">
+                      <div *ngIf="f.formssubmitted.errors.required">Please enter submitted forms.</div>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select1">Count</label>
+                  <div class="col-md-9">
+                    <input type="number" formControlName="count" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.count.errors }">
+                    <div *ngIf="submitted && f.count.errors" class="invalid-feedback">
+                        <div *ngIf="f.count.errors.required">Please enter count.</div>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="select1">Total</label>
+                    <div class="col-md-9">
+                      <input type="number" formControlName="total" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.total.errors }">
+                      <div *ngIf="submitted && f.total.errors" class="invalid-feedback">
+                          <div *ngIf="f.total.errors.required">Please enter total.</div>
+                        </div>
+                    </div>
+                  </div>  
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="file-input"></label>
+              <div class="col-md-9">
+                <button type="submit" class="btn btn-sm btn-success button formButtons"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                <button type="reset" class="btn btn-sm btn-danger button formButtons" (click)="removeImg()"><i class="fa fa-ban"></i> Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

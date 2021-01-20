@@ -1,0 +1,90 @@
+<app-header [fixed]="true" [navbarBrandFull]="{src: 'assets/img/test.png', width: 89, height: 25, alt: 'Project Logo'}" [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
+  [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
+  
+  <ul class="nav navbar-nav ml-auto" id="headerPart">
+      <li class="nav-item px-3" style="font-family: initial;font-size: 18px;margin-left: 10px;">
+      <a class="nav-link" href="javascript:void(0);"></a>
+      </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="javascript:void()" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+        <img class="img-avatar" src="{{user_image &&  globals.URL+'/user_image/'+user_image || 'assets/img/default-user.png'}}"
+        />{{user_data.firstName}}
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong> Account ({{user_data.firstName}}) </strong></div>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="open(content)"><i class="fa fa-unlock-alt"></i>Change
+          Password
+        </a>
+        <div class="divider"></div>
+        <a class="dropdown-item" href="javascript:void(0);" (click)="auth.logout()"><i class="fa fa-sign-out"></i> Logout</a>
+      </div>
+    </li>
+  </ul>
+</app-header>
+<div class="app-body">
+  <app-sidebar [fixed]="true" [display]="'lg'">
+    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+      <app-breadcrumb></app-breadcrumb>
+    </ol>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  </main>
+</div>
+<app-footer>
+  <span></span>
+  <span class="ml-auto">Developed by <a href="javascript:void(0)">Bateshwar (Web Developer)</a></span>
+</app-footer>
+
+<!-- change password model -->
+
+<ng-template #content let-modal>
+  <div class="modal-header view">
+    <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post" class="form-horizontal formStyle" name="form" (ngSubmit)="f.form.valid && changePassword()" #f="ngForm"
+      novalidate>
+      <div class="form-group row">
+        <label class="col-md-4">Old Password</label>
+        <div class="input-group col-md-8">
+          <input type="password" name="oldpassword" class="form-control" placeholder="Enter your old password" [(ngModel)]="oldpassword"
+            #Oldpassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Oldpassword.invalid}" required>
+          <div *ngIf="f.submitted && Oldpassword.invalid" class="invalid-feedback">
+            <div *ngIf="Oldpassword.errors.required">Please enter your old password</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-4">New Password</label>
+        <div class="input-group col-md-8">
+          <input type="password" name="newpassword" class="form-control" placeholder="Enter your new password" [(ngModel)]="newpassword"
+            #Newpassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Newpassword.invalid}" required>
+          <div *ngIf="f.submitted && Newpassword.invalid" class="invalid-feedback">
+            <div *ngIf="Newpassword.errors.required">Please enter your new password</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-4"></label>
+        <div class="input-group col-md-8">
+          <button type="submit" class="btn btn-sm btn-success c-p-btn"><i class="fa fa-dot-circle-o"></i> Chane</button>
+          <button class="btn btn-sm btn-danger c-p-btn" type="reset" (click)="modal.close('Close click')"><i class="fa fa-ban"></i>
+            Close</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+  </div>
+</ng-template>

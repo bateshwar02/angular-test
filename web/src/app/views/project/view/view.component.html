@@ -1,0 +1,184 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Project List
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th width="8%">S.No</th>
+                <th width="20%">Project</th>
+                <th width="10%">Count</th>
+                <th width="10%">Total</th>
+                <th width="20%">Submitted Forms</th>
+                <th width="20%">Created Date</th>
+                <th width="12%">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of ppData; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{p.project}}</td>
+                <td>{{p.count}}</td>
+                <td>{{p.total}}</td>
+                <td>{{p.formssubmitted}}</td>
+                <td>{{p.createdon |date:'MMM d, y'}}</td>
+                <!-- <td>{{u.email}}</td> -->
+                <!-- <td> <img class="img-avatar" src="{{globals.URL+'/user_image/'+u.imageURL}}" height="50" width="50" ></td> -->
+                <td>
+                  <span class="delete_subject marginClass cursorClass" data-title="View" (click)="open(content,p.id)"><img
+                      src="assets/img/view.png" alt="" /></span>
+                  <span class="edit_subject_data  marginClass cursorClass " data-title="Edit" (click)="alertMsg()"><img src="assets/img/edit_icon.png"
+                      alt="" /></span>
+                  <span class="delete_subject marginClass cursorClass" data-title="Delete" (click)="alertMsg()"><img src="assets/img/delete_icon.png"
+                      alt="" /></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div id="content" #content>
+    <div id="contentToConvert">
+      <div class="modal-header view">
+        <h4 class="modal-title" id="modal-basic-title">Project Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body prodDetails">
+        <div class="form-group row">
+          <h6 class="col-md-12 head">Project Details </h6>
+        </div>
+        <hr>
+        <div class="form-horizontal formStyle">
+          <div class="form-group row">
+            <label class="col-md-4">Project Name</label>
+            <div class="input-group col-md-8">
+              {{project}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4">Descrisption</label>
+            <div class="input-group col-md-8">
+              {{description}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4">Submitted Form</label>
+            <div class="input-group col-md-8">
+              {{formssubmitted}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4">Total</label>
+            <div class="input-group col-md-8">
+              {{total}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4">Count</label>
+            <div class="input-group col-md-8">
+              {{count}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4">
+              Symbol
+            </label>
+            <div class="input-group col-md-8">
+              {{symbol}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4">Created Date
+            </label>
+            <div class="input-group col-md-8">
+              {{createdon | date:'MMM d, y'}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal formStyle">
+          <hr>
+          <div class="form-group row">
+            <label class="col-md-12 head">Project Form Details </label>
+          </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-4">Form Name
+              </label>
+              <div class="input-group col-md-8">
+                {{fname}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4">Form Shape
+              </label>
+              <div class="input-group col-md-8">
+                {{shape}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-horizontal formStyle">
+          <hr>
+          <div class="form-group row">
+            <label class="col-md-12 head">Project Assign User Details </label>
+          </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-4"> Name
+              </label>
+              <div class="input-group col-md-8">
+                {{firstName}} {{lastName}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4">Image
+              </label>
+              <div class="input-group col-md-8">
+                <img class="img-avatar" src="{{globals.URL+'/user_image/'+imageURL}}" height="100" width="100">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4"> Email
+              </label>
+              <div class="input-group col-md-8">
+                {{email}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4"> Age
+              </label>
+              <div class="input-group col-md-8">
+                {{age}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="form-group row">
+        <div class="input-group col-md-4">
+        </div>
+        <div class="input-group col-md-8">
+          <button class="btn btn-sm btn-danger c-p-btn" type="reset" (click)="modal.close('Close click')">
+            <i class="fa fa-ban"></i>
+            Close
+
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

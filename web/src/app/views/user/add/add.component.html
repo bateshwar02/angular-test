@@ -1,0 +1,83 @@
+<div class="animated fadeIn">
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="card form-comp">
+        <div class="card-header">
+          <strong>Add</strong> User
+        </div>
+        <div class="card-body form-body formMargin">
+     <!-- add News form -->
+
+          <form  class="form-horizontal"  [formGroup]="userForm" (ngSubmit)="AddUser()">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">First Name</label>
+              <div class="col-md-9">
+                <input type="text" formControlName="fname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fname.errors }">
+                <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+                    <div *ngIf="f.fname.errors.required">Please enter user first name</div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Last Name</label>
+              <div class="col-md-9">
+                <input type="text" formControlName="lname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }">
+                <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lname.errors.required">Please enter user last name</div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Age</label>
+              <div class="col-md-9">
+                <input type="number" formControlName="age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
+                <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                    <div *ngIf="f.age.errors.required">Please enter Age</div>
+                    <!-- <div *ngIf="f.age.errors.pattern">Number only</div> -->
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Email Name</label>
+              <div class="col-md-9">
+                <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Please enter email-id</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="select1">Password</label>
+              <div class="col-md-9">
+                <input type="password" formControlName="pass" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pass.errors }">
+                <div *ngIf="submitted && f.pass.errors" class="invalid-feedback">
+                    <div *ngIf="f.pass.errors.required">Please enter password</div>
+                    <div *ngIf="f.pass.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+              </div>
+            </div>
+
+           <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="file-input">Image</label>
+              <div class="col-md-9 fullwidth">
+                <img [src]="imageUrl" height="200" class="rander_image" *ngIf="loaded"> <br/>
+                <input type="file"   (change)="onchangeImage($event)" class="form-control" />
+                
+              </div>
+            </div>
+           
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="file-input"></label>
+              <div class="col-md-9">
+                <button type="submit" class="btn btn-sm btn-success button formButtons"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                <button type="reset" class="btn btn-sm btn-danger button formButtons" (click)="removeImg()"><i class="fa fa-ban"></i> Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
